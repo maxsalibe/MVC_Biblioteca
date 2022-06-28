@@ -1,0 +1,25 @@
+﻿@model Biblioteca.Modelo.Libro
+@{
+}
+
+<h4>Libros disponibles</h4>
+<hr />
+<div class="d-inline">
+    <form action="BibliotecaReservas/Buscar">
+        <label for="nombre" class="">Ingrese el texto a buscar</label>
+        <input name="nombre" class="form-control" /><button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+</div>
+
+<div class="card-columns">
+    @foreach (var libro in ViewBag.libros)
+    {
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="/imagenes/@libro.rutaimagen" alt="@libro.titulo">
+            <div class="card-body">
+                <h5 class="card-title">@libro.titulo</h5>
+                <a class="btn btn-primary" href="../lectorselector?libro=@libro.libroId">Reservar libro</a>
+            </div>
+        </div>
+    }
+</div>

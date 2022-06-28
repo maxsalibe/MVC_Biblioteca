@@ -1,0 +1,37 @@
+﻿@model Biblioteca.Modelo.Lector
+
+@{
+    ViewData["Title"] = "Devolución realizada";
+}
+
+<h1>Detalles de tu devolución</h1>
+
+<div>
+    @if (ViewBag.error)
+    {
+        <h4>Ups! No pudimos procesar la devolución de este libro de @ViewBag.lector.Apellido, @ViewBag.lector.Nombre</h4>
+        <hr />
+        <h4>Libro que devolviste</h4>
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="/imagenes/@ViewBag.libro.rutaimagen" alt="@ViewBag.libro.titulo">
+            <div class="card-body">
+                <h5 class="card-title">@ViewBag.libro.titulo</h5>
+            </div>
+        </div>
+    }
+    else
+    {
+        <h4>Se le prestó el libro a @ViewBag.lector.Apellido, @ViewBag.lector.Nombre</h4>
+        <hr />
+        <h4>Libro que devolviste</h4>
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="/imagenes/@ViewBag.libro.rutaimagen" alt="@ViewBag.libro.titulo">
+            <div class="card-body">
+                <h5 class="card-title">@ViewBag.libro.titulo</h5>
+            </div>
+        </div>
+    }
+
+    <hr />
+    <a href="javascript:history.back()">volver a la página anterior</a>
+</div>

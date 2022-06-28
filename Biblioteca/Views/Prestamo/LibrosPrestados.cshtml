@@ -1,0 +1,62 @@
+﻿@model Biblioteca.Modelo.LibroEstado
+
+@{
+    ViewData["Title"] = "Lista de libros del lector";
+    var libros = ViewBag.libros;
+}
+
+<h1>Lista de libros leidos</h1>
+
+<div>
+    <hr />
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Imagen
+                </th>
+                <th>
+                    Titulo
+                </th>
+                <th>
+                    Estado
+                </th>
+                <th>
+                    Acción
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var libro in libros)
+            {
+                <tr>
+                    <td>
+                        <img src="/imagenes/@libro.rutaimagen" alt="@libro.titulo" style="width:64px;height: 64px" />
+                    </td>
+                    <td>
+                        @libro.titulo
+                    </td>
+                    <td>
+                        @if (libro.prestado)
+                        {
+                            @:prestado
+                        }
+                        else
+                        {
+                            @:devuelto
+                        }
+                    </td>
+                    <td>
+                        @if (libro.prestado)
+                        {
+                            <a href="../prestamo/devolucion?lector=@ViewBag.lector&libro=@libro.libroId">Seleccionar</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <hr />
+    <a href="javascript:history.back()">volver a la página anterior</a>
+</div>

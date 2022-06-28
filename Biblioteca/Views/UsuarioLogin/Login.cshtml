@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "Ingreso de Usuario";
+}
+
+<h1>Ingreso al sistema</h1>
+
+@if (ViewBag.Usuario == null) {
+    <h4>Ingrese usuario y contraseña</h4>
+} else {
+    <h4 class="text-active">Usuario Conectado</h4>
+}
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        @if (ViewBag.Usuario == null) {
+            <form asp-action="Login">
+                <div class="text-danger"></div>
+                <div class="form-group">
+                    <label for="usuario" class="control-label">Usuario</label>
+                    <input for="usuario" name="usuario" class="form-control" required/>
+                </div>
+                <div class="form-group">
+                    <label for="clave" class="control-label">Clave</label>
+                    <input for="clave" name="clave" class="form-control" type="password"/>
+                    <span class="text-danger">@ViewBag.mensaje</span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Ingresar" class="btn btn-primary" />
+                </div>
+            </form>
+        } else {
+            <div class="text-danger"></div>
+            <div class="form-group">
+                <label for="usuario" class="control-label">usuario</label>
+                <input for="usuario" class="form-control" value="@ViewBag.usuario.usuario" readonly/>
+            </div>
+            <div class="form-group">
+                <label for="clave" class="control-label">Apellido y nombre</label>
+                <input for="clave" class="form-control" value="@ViewBag.usuario.Apellido, @ViewBag.usuario.Nombre" readonly />
+            </div>
+        }
+    </div>
+</div>
+
+<div>
+    <a asp-controller="home" asp-action="Index">Volver al inicio</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

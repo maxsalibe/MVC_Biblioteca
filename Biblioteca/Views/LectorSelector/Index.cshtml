@@ -1,0 +1,75 @@
+﻿@model Biblioteca.Modelo.Lector
+
+@{
+    ViewData["Title"] = "Lista de lectores suscriptos";
+}
+
+<h1>Lista de lectores disponibles</h1>
+
+<div>
+    @if (ViewBag.libro != null)
+    {
+        <h4>Indique el lector que retirará el libro</h4>
+        <hr />
+        <div class="d-inline">
+            <form action="LectorSelector" class="form-inline">
+                <input name="nombre" class="form-control" /><button type="submit" class="btn btn-primary">Buscar</button>
+            </form>
+        </div>
+
+        <hr />
+        <h4>Libro que estas reservando</h4>
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="/imagenes/@ViewBag.libro.rutaimagen" alt="@ViewBag.libro.titulo">
+            <div class="card-body">
+                <h5 class="card-title">@ViewBag.libro.titulo</h5>
+            </div>
+        </div>
+    }
+    <hr />
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Apellido
+                </th>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                    Domicilio
+                </th>
+                <th>
+                    Acción
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var lector in ViewBag.lectores)
+            {
+                <tr>
+                    <td>
+                        @lector.Apellido
+                    </td>
+                    <td>
+                        @lector.Nombre
+                    </td>
+                    <td>
+                        @lector.Domicilio
+                    </td>
+                    <td>
+                        @if (ViewBag.libro != null)
+                        {
+                            <a href="../prestamo?lector=@lector.lectorId&libro=@ViewBag.libro.libroId">Seleccionar</a>
+                        }
+                        @if (ViewBag.libro == null)
+                        {
+                            <a href="../prestamo/LibrosPrestados?lector=@lector.lectorId">Seleccionar</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
